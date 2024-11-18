@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defective Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Defective Application</h1>
+    <form id="defectiveForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <div class="error" id="usernameError"></div>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" minlength="8" required>
+        <div class="error" id="passwordError"></div>
+
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required>
+        <div class="error" id="emailError"></div>
+
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" min="1" max="100" required>
+
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('defectiveForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let valid = true;
+
+            // Username validation
+            const username = document.getElementById('username').value;
+            const usernameError = document.getElementById('usernameError');
+            const usernameRegex = /^[a-zA-Z0-9]+$/;
+            if (!usernameRegex.test(username)) {
+                usernameError.textContent = "Bhai You Don't know how to fill the form!!";
+                valid = false;
+            } else {
+                usernameError.textContent = "";
+            }
+
+            // Password validation
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('passwordError');
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).+$/;
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = "Bhai Password thoda toh secure bnaa !!!";
+                valid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+            // Email validation
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                emailError.textContent = "Enter a valid email address.";
+                valid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            // If all fields are valid, submit the form
+            if (valid) {
+                alert('Form submitted successfully!');
+            }
+        });
+    </script>
+</body>
+</html>
